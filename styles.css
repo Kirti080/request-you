@@ -28,8 +28,4 @@ footer { border-top: 1px solid #edf0ea; padding-top: 16px; color: #64736c; }
 button:disabled { opacity: .45; cursor: default; }
 .note { text-align: center; font-size: 12px; margin-top: 25px; }
 #storage-warning { font-size: 13px; color: #8a4646; }
-@media (max-width: 480px) { main { margin-top:: center; padding: 32px 0; color: #64736c; font-size: 14px; }
-footer { border-top: 1px solid #edf0ea; padding-top: 16px; color: #64736c; }
-#clear-completed { background: transparent; color: #365948; padding: 8px 0; }
-button:disabled { opacity: .45; cursor: default; }
-.note { text-align: center; font-size: 12px; mar 36px; } .card { padding: 18px; } .toolbar { flex-wrap: wrap; } }
+@media (max-width: 480px) { main { margin-top: 36px; } .card { padding: 18px; } .toolbar { flex-wrap: wrap; } }
