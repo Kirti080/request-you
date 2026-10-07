@@ -3,13 +3,7 @@
 body { margin: 0; }
 main { width: min(700px, 100% - 32px); margin: 80px auto; }
 header { margin-bottom: 30px; }
-.eyebrow { font-size: 11px; letter-spacing: 2px; font-weight: 700; color: #537568; }
- 10px 0 25px; }
-input, button { font: inherit; }
-input[type="text"], input:not([type]) { width: 100%; min-width: 0; padding: 12px; border: 1px solid #bbc9c0; border-radius: 9px; }
-button { cursor: pointer; border: 0; border-radius: 8px; padding: 11px 15px; }
-button[type="submit"] { color: white; background: #28604d; white-space: nowrap; }
-button:hover { filter: brightness(.93); }
+(.93); }
 :focus-visible { outline: 3px solid #b17b32; outline-offset: 3px; }
 .toolbar, footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 13px; }
 .filters { display: flex; gap: 4px; }
