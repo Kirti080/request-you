@@ -4,11 +4,7 @@ body { margin: 0; }
 main { width: min(700px, 100% - 32px); margin: 80px auto; }
 header { margin-bottom: 30px; }
 .eyebrow { font-size: 11px; letter-spacing: 2px; font-weight: 700; color: #537568; }
-h1 { font-size: clamp(36px, 7vw, 52px); letter-spacing: -2px; margin: 12px 0; }
-header > p:last-child, .note { color: #64736c; }
-.card { padding: 28px; border: 1px solid #dce3d8; border-radius: 20px; background: #fff; box-shadow: 0 12px 40px #203a3508; }
-label { font-size: 14px; font-weight: 600; }
-.input-row { display: flex; gap: 10px; margin: 10px 0 25px; }
+ 10px 0 25px; }
 input, button { font: inherit; }
 input[type="text"], input:not([type]) { width: 100%; min-width: 0; padding: 12px; border: 1px solid #bbc9c0; border-radius: 9px; }
 button { cursor: pointer; border: 0; border-radius: 8px; padding: 11px 15px; }
