@@ -1,0 +1,4 @@
+Future project ideas
+
+- Add task due dates.
+- Allow users to edit task titles.
