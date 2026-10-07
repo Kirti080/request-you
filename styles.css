@@ -23,9 +23,4 @@ ul { list-style: none; padding: 0; margin: 18px 0; }
 .task.completed label { text-decoration: line-through; color: #7b887f; }
 .delete { background: transparent; color: #8a4646; font-size: 13px; }
 #empty { text-align: center; padding: 32px 0; color: #64736c; font-size: 14px; }
-footer { border-top: 1px solid #edf0ea; padding-top: 16px; color: #64736c; }
-#clear-completed { background: transparent; color: #365948; padding: 8px 0; }
-button:disabled { opacity: .45; cursor: default; }
-.note { text-align: center; font-size: 12px; margin-top: 25px; }
-#storage-warning { font-size: 13px; color: #8a4646; }
-@media (max-width: 480px) { main { margin-top: 36px; } .card { padding: 18px; } .toolbar { flex-wrap: wrap; } }
+foote
