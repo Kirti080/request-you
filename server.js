@@ -1,14 +1,4 @@
-import http from 'node:http';
-import { readFile } from 'node:fs/promises';
-
-const allowed = new Map([
-  ['/', ['index.html', 'text/html']],
-  ['/styles.css', ['styles.css', 'text/css']],
-  ...['app.js', 'tasks.js', 'storage.js', 'dom.js'].map(file => [`/${file}`, [file, 'text/javascript']]),
-]);
-const port = Number(process.env.PORT || 3000);
-const server = http.createServer(async (request, response) => {
-  if (!['GET', 'HEAD'].includes(request.method)) {
+equest.method)) {
     response.writeHead(405, { Allow: 'GET, HEAD' }).end();
     return;
   }
