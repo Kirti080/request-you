@@ -1,9 +1,0 @@
-{
-  "name": "everyday-todo",
-  "version": "1.0.0",
-  "private": true,
-  "type": "module",
-  "description": "A simple to-do app with no dependencies.",
-  "s
-  "engines": { "node": ">=22" }
-}
