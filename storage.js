@@ -9,11 +9,3 @@ export function loadTasks() {
   }
 }
 
-export function saveTasks(tasks) {
-  try {
-    globalThis.localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
-    return true;
-  } catch {
-    return false;
-  }
-}
