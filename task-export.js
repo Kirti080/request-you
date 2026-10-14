@@ -6,62 +6,6 @@ export function downloadName(date = new Date()) {
   const stamp = date.toISOString().slice(0, 10);
   return `everyday-tasks-${stamp}.json`;
 }
-export function downloadName(date = new Date()) {
-  const stamp = date.toISOString().slice(0, 10);
-  return `everyday-tasks-${stamp}.json`;
-}
-export function downloadName(date = new Date()) {
-  const stamp = date.toISOString().slice(0, 10);
-  return `everyday-tasks-${stamp}.json`;
-}
-export function downloadName(date = new Date()) {
-  const stamp = date.toISOString().slice(0, 10);
-  return `everyday-tasks-${stamp}.json`;
-}
-export function downloadName(date = new Date()) {
-  const stamp = date.toISOString().slice(0, 10);
-  return `everyday-tasks-${stamp}.json`;
-}
-export function downloadName(date = new Date()) {
-  const stamp = date.toISOString().slice(0, 10);
-  return `everyday-tasks-${stamp}.json`;
-}
-export function downloadName(date = new Date()) {
-  const stamp = date.toISOString().slice(0, 10);
-  return `everyday-tasks-${stamp}.json`;
-}
-export function downloadName(date = new Date()) {
-  const stamp = date.toISOString().slice(0, 10);
-  return `everyday-tasks-${stamp}.json`;
-}
-export function downloadName(date = new Date()) {
-  const stamp = date.toISOString().slice(0, 10);
-  return `everyday-tasks-${stamp}.json`;
-}
-export function downloadName(date = new Date()) {
-  const stamp = date.toISOString().slice(0, 10);
-  return `everyday-tasks-${stamp}.json`;
-}
-export function downloadName(date = new Date()) {
-  const stamp = date.toISOString().slice(0, 10);
-  return `everyday-tasks-${stamp}.json`;
-}
-export function downloadName(date = new Date()) {
-  const stamp = date.toISOString().slice(0, 10);
-  return `everyday-tasks-${stamp}.json`;
-}
-export function downloadName(date = new Date()) {
-  const stamp = date.toISOString().slice(0, 10);
-  return `everyday-tasks-${stamp}.json`;
-}
-export function downloadName(date = new Date()) {
-  const stamp = date.toISOString().slice(0, 10);
-  return `everyday-tasks-${stamp}.json`;
-}
-export function downloadName(date = new Date()) {
-  const stamp = date.toISOString().slice(0, 10);
-  return `everyday-tasks-${stamp}.json`;
-}
 
 // Converts task data into readable JSON text.
 // Pretty formatting makes exported files easy to inspect.
