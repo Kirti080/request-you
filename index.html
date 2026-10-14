@@ -1,4 +1,45 @@
 <!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Everyday — Your tasks</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="eyebrow">ONE DAY AT A TIME</p>
+        <h1>Everyday</h1>
+        <p>A little space for everything you want to do.</p>
+        <p id="summary" role="status">0 of 0 completed</p>
+      </header>
 
+      <p id="storage-warning" role="alert" hidden></p>
+
+      <form id="task-form">
+        <label for="task-input">New task</label>
+        <input id="task-input" name="task" type="text" maxlength="200"
+          placeholder="What needs to get done?" autocomplete="off" required>
+        <button type="submit">Add task</button>
+      </form>
+
+      <section aria-labelledby="tasks-heading">
+        <h2 id="tasks-heading">Your tasks</h2>
+        <div class="filters" role="group" aria-label="Filter tasks">
+          <button type="button" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" data-filter="active" aria-pressed="false">Active</button>
+          <button type="button" data-filter="completed" aria-pressed="false">Completed</button>
+        </div>
+        <ul id="task-list" aria-label="Tasks"></ul>
+        <p id="empty">A fresh start. Add your first task above.</p>
+        <footer>
+          <span id="count" role="status">0 left</span>
+          <button id="clear-completed" type="button" disabled>Clear completed</button>
+        </footer>
+      </section>
+      <noscript>Enable JavaScript to add and manage your tasks.</noscript>
+    </main>
+    <script type="module" src="./app.js"></script>
   </body>
 </html>
