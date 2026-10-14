@@ -1,7 +1,12 @@
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 
-const port = Number(process.env.PORT ?? 3000);
+const portSetting = process.env.PORT ?? '3000';
+const port = Number(portSetting);
+if (!/^\d+$/.test(portSetting) || !Number.isInteger(port) || port < 0 || port > 65535) {
+  console.error('Invalid PORT: expected a decimal integer from 0 to 65535 (0 selects an available port).');
+  process.exit(1);
+}
 const allowed = new Map([
   ['/', ['./index.html', 'text/html']],
   ['/index.html', ['./index.html', 'text/html']],

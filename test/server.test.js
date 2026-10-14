@@ -1,7 +1,22 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { spawn } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import http from 'node:http';
+
+test('invalid port settings fail with a clear error before starting the server', () => {
+  for (const port of ['', ' ', 'abc', '-1', '65536', '1.5', 'NaN', 'Infinity', '0x50', '3e3', ' 3000 ']) {
+    const result = spawnSync(process.execPath, ['server.js'], {
+      cwd: new URL('../', import.meta.url),
+      env: { ...process.env, PORT: port },
+      encoding: 'utf8',
+      timeout: 2000,
+    });
+    assert.ifError(result.error);
+    assert.equal(result.status, 1, `PORT=${JSON.stringify(port)}`);
+    assert.match(result.stderr, /Invalid PORT: expected a decimal integer from 0 to 65535/);
+    assert.equal(result.stdout, '');
+  }
+});
 
 test('server serves app assets and survives malformed URLs', { timeout: 10000 }, async t => {
   const child = spawn(process.execPath, ['server.js'], {
