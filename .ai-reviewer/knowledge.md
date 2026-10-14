@@ -2,32 +2,29 @@
 
 ## Architecture
 
-This is the dependency-free “Everyday” browser to-do app, served by a small Node.js server. `app.js` owns UI state and event handling, while `tasks.js` contains task operations, `storage.js` handles localStorage persistence, and `dom.js` renders task elements. The project uses native ES modules for the application and Node’s built-in test runner and syntax checks.
+Everyday is a dependency-free browser to-do app served by a small Node.js server. `app.js` owns UI state and event wiring, while `tasks.js`, `storage.js`, and `dom.js` separate task operations, persistence, and rendering as documented in `CONTRIBUTING.md`. The project uses native ES modules for the application and Node’s built-in test runner and syntax checks.
 
 ## Conventions
 
-- Use native ES modules in application code; `package.json` sets `"type": "module"` and `app.js` imports from `./tasks.js`, `./storage.js`, and `./dom.js`.
-- Keep responsibilities separated: task mutations belong in `tasks.js`, persistence in `storage.js`, and rendering in `dom.js` (`CONTRIBUTING.md`).
-- Keep application code dependency-free and compatible with Node.js 22 or newer (`README.md`, `package.json`).
-- Use two-space indentation and concise functional transformations such as `tasks.filter(...)` in `app.js`.
-- Render user-controlled task titles with `textContent`, not HTML. `dom.js` assigns `label.textContent = task.title` and builds elements with DOM APIs.
-- Preserve accessibility: controls use labels, `aria-label`, `aria-pressed`, disabled state, and explicit focus restoration (`dom.js`, `app.js`).
-- Reject whitespace-only task input with `input.value.trim()` before creating a task (`app.js`).
-- Persist through the storage abstraction and retain usable in-memory state when saving or loading fails (`app.js`, `README.md`).
-- The standard verification commands are `npm run build` and `npm test`; the build performs `node --check` on the main server and application modules (`package.json`).
-- Files under `examples/` are small standalone CommonJS demonstrations using `'use strict'`, `module.exports`, and no dependencies; do not use them as the application’s module-style convention (`examples/simple-01.js` through `simple-09.js`).
+- Use two-space indentation and native JavaScript modules in application code; `package.json` sets `"type": "module"` and `CONTRIBUTING.md` explicitly requires modules and no unnecessary dependencies.
+- Keep responsibilities separated: task mutations belong in `tasks.js`, browser storage in `storage.js`, and DOM construction in `dom.js` (`CONTRIBUTING.md`).
+- Keep UI state and event handling in `app.js`; rendering is centralized through `renderTasks()` in `dom.js`, with list updates performed using `replaceChildren()`.
+- Render user-controlled task text safely with `textContent`, not HTML interpolation. `dom.js` uses `label.textContent` and button `textContent`; `app.js` also uses `textContent` for status and warning messages.
+- Preserve accessibility behavior: controls use real labels and buttons (`dom.js`), delete buttons have task-specific `aria-label`s, filters update `aria-pressed` (`app.js`), and focus is restored after mutations.
+- Task input must reject whitespace-only values (`app.js`), and task persistence uses the documented `everyday-tasks` local-storage key (`README.md`).
+- Changes should remain dependency-free and support Node.js 22 or newer. The available checks are `npm run build` for `node --check` validation and `npm test` for Node tests (`package.json`, `README.md`).
+- Example files under `examples/` intentionally use CommonJS, `'use strict'`, semicolons, and small pure helpers; do not use them as the application module convention.
 
 ## Intentional non-standard choices
 
-- The application deliberately uses event delegation on the task list (`app.js`) rather than attaching listeners to every rendered checkbox or delete button.
-- Rendering replaces the list with a `DocumentFragment` via `replaceChildren` (`dom.js`), so DOM nodes and their per-node state are recreated after updates; focus is restored explicitly in `app.js`.
-- Storage failures are non-fatal: the UI continues operating and displays a warning instead of blocking task edits (`app.js`, `README.md`).
+- The app remains usable when storage fails: `loadTasks()`/`saveTasks()` communicate failure through warnings rather than making persistence a hard requirement (`README.md`, `app.js`).
+- Invalid saved task entries are skipped while valid entries are recovered, rather than rejecting the entire stored collection (`README.md`).
+- The application has no dependency installation step; `npm start` runs the local server directly (`CONTRIBUTING.md`, `package.json`).
 
 ## Watch out for
 
-- Do not interpolate task titles into `innerHTML`; this would violate the documented XSS-safe rendering convention (`CONTRIBUTING.md`, `dom.js`).
-- Preserve task IDs when changing rendering or event handling; checkbox and delete actions depend on `data-id` (`dom.js`, `app.js`).
-- Ensure filter changes and mutations continue to update counts, empty-state text, pressed states, and the Clear completed button through `render()` (`app.js`).
-- Treat malformed saved entries as skippable rather than discarding valid tasks (`README.md`).
-- `dom.js` currently contains repeated copies of the `renderTasks` declaration. Avoid adding more duplicates; consolidate the file while preserving the single intended export.
-- Do not blindly convert `examples/` to ESM or include it in application imports; its CommonJS style conflicts with the root package’s ESM setting but is explicit in those standalone examples.
+- Introducing `innerHTML` or unsafe HTML interpolation for task titles; this would violate the explicit `textContent` safety rule (`CONTRIBUTING.md`, `dom.js`).
+- Moving task logic, persistence, or rendering across their designated modules without a clear reason.
+- Breaking focus restoration, visible keyboard focus, labels, filter `aria-pressed` state, or narrow-screen usability.
+- Treating storage errors or malformed saved entries as fatal; the documented behavior is warning plus continued use and partial recovery.
+- Adding dependencies or requiring an installation step when the project is intentionally dependency-free.
