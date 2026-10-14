@@ -1,0 +1,13 @@
+﻿{
+  "name": "everyday",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "build": "node --check server.js && node --check app.js && node --check tasks.js && node --check storage.js && node --check dom.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
