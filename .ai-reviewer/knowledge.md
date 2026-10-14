@@ -1,17 +1,29 @@
 # prysta-cleaner reviewer notes
 
 ## Architecture
-The repository currently exposes only a GitLab-generated README; no source code, configuration, tests, or deployment implementation is represented in the reviewed files. The project’s purpose and runtime architecture are therefore not yet documented.
+
+This is the dependency-free “Everyday” browser to-do app, served by a small Node.js server. `app.js` owns DOM event wiring and application state; `tasks.js` should contain task transformations, `storage.js` persistence, and `dom.js` rendering. The project uses native ES modules for the application and Node’s built-in test/syntax-check tooling.
 
 ## Conventions
-- `README.md` is still the stock GitLab project template, including sections for setup, integrations, collaboration, CI/CD, and project documentation.
-- The repository’s canonical Git remote and default branch guidance are shown as `https://gitlab.com/testdetox50/prysta-cleaner.git` and `main` in `README.md`.
-- No language, framework, directory layout, naming convention, test command, or formatting policy is established by the reviewed files.
+
+- Require Node.js 22+ and keep the runtime dependency-free; see `package.json` and `CONTRIBUTING.md`.
+- Use native ES module syntax in application code (`app.js` imports from `tasks.js`, `storage.js`, and `dom.js`); `package.json` sets `"type": "module"`.
+- Keep responsibilities separated: task operations belong in `tasks.js`, local-storage handling in `storage.js`, and DOM creation in `dom.js` (`CONTRIBUTING.md`).
+- Use two-space indentation and concise functional transformations such as `tasks.filter(...)` in `app.js`.
+- Render user-controlled task titles with `textContent`, not HTML. `dom.js` uses `label.textContent = task.title` and constructs elements with `document.createElement`.
+- Preserve accessibility: controls use semantic elements, labels connect via `htmlFor`/`id`, delete buttons have descriptive `aria-label`s, filter buttons update `aria-pressed`, and event handlers restore focus (`app.js`, `dom.js`).
+- Reject whitespace-only submissions with `input.value.trim()` while preserving the entered title when creating a valid task (`app.js`).
+- Persist under the `everyday-tasks` local-storage key, tolerate storage failures, and recover valid entries while skipping invalid saved entries (`README.md`, `app.js`).
+- Validate JavaScript with `npm run build`, which runs `node --check` on the server and application modules; run tests with `npm test`.
 
 ## Intentional non-standard choices
-- `README.md` contains generic GitLab onboarding and placeholder guidance rather than project-specific usage instructions; this appears to be scaffolding, not documentation of implemented behavior.
+
+- The files under `examples/` are deliberately tiny, standalone CommonJS demonstrations using `'use strict'`, `module.exports`, and no dependencies. They do not follow the application’s ES module style and should not be treated as production architecture.
+- The UI intentionally delegates checkbox and delete handling from the list container rather than attaching handlers to every rendered row (`app.js`).
 
 ## Watch out for
-- Flag changes that add or modify implementation without updating the currently empty project description, installation, usage, and testing guidance in `README.md`.
-- Do not infer runtime behavior, supported platforms, dependencies, or CI/deployment guarantees from the README’s generic GitLab links; none are configured or demonstrated in the reviewed files.
-- Treat claims about tests, security scanning, deployment, or integrations as unsupported unless corresponding repository configuration or implementation is added.
+
+- Do not use `innerHTML` or interpolate task titles into markup; this would violate the explicit text-rendering/XSS convention (`CONTRIBUTING.md`, `dom.js`).
+- Keep persistence failure behavior non-fatal: `loadTasks()` errors should leave the app usable, while `saveTasks()` failures must surface the warning (`app.js`, `README.md`).
+- Preserve focus and keyboard behavior when changing rendering or event delegation; `renderTasks()` replaces the list contents and `app.js` explicitly refocuses controls.
+- `dom.js` currently contains the same `renderTasks` export repeated multiple times. Treat this as a likely defect: duplicate exported declarations can make the ES module fail syntax validation and should be reduced to one implementation.
