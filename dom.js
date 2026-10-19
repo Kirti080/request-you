@@ -7,7 +7,7 @@ export function renderTasks(list, tasks) {
     checkbox.type = 'checkbox';
     
     remove.type = 'button';
-    remove. = 'delete';
+    remove.className = 'delete';
     remove.dataset.id = task.id;
     remove.textContent = 'Delete';
     remove.setAttribute('aria-label', `Delete ${task.title}`);
