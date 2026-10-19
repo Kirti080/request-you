@@ -33,7 +33,15 @@ test('malformed JSON and non-array data return a warning without throwing', t =>
 test('recovers valid entries and rejects invalid or duplicate tasks without rewriting storage', t => {
   const valid = { id: 'one', title: 'Read', completed: true };
   mockStorage(t, { getItem: () => JSON.stringify([
-lures do not escape to the app', t => {
+    valid, valid, null, { id: 'two', title: ' ', completed: false },
+    { id: 'three', title: 'Read', completed: 'yes' },
+    { id: 'four', title: 'x'.repeat(201), completed: false },
+    { id: '', title: 'Read', completed: false },
+  ]), setItem: () => assert.fail('Loading must not overwrite stored data') });
+  assert.deepEqual(loadTasks(), { tasks: [valid], error: true });
+});
+
+test('storage access and quota failures do not escape to the app', t => {
   mockStorage(t, {
     getItem() { throw new Error('Access denied'); },
     setItem() { throw new Error('Quota exceeded'); },

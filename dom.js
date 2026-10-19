@@ -5,7 +5,13 @@ export function renderTasks(list, tasks) {
     row.className = `task${task.completed ? ' completed' : ''}`;
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
-    
+    checkbox.checked = task.completed;
+    checkbox.id = `task-${task.id}`;
+    checkbox.dataset.id = task.id;
+    const label = document.createElement('label');
+    label.htmlFor = checkbox.id;
+    label.textContent = task.title;
+    const remove = document.createElement('button');
     remove.type = 'button';
     remove.className = 'delete';
     remove.dataset.id = task.id;
