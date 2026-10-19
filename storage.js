@@ -4,7 +4,9 @@ export function loadTasks() {
   try {
     const raw = globalThis.localStorage.getItem(STORAGE_KEY);
     if (raw === null) return { tasks: [], error: false };
-    const entries = JSON.pa
+    const entries = JSON.parse(raw);
+    if (!Array.isArray(entries)) return { tasks: [], error: true };
+
     const tasks = [];
     const ids = new Set();
     let error = false;
