@@ -14,7 +14,15 @@ test('invalid port settings fail with a clear error before starting the server',
     assert.ifError(result.error);
     assert.equal(result.status, 1, `PORT=${JSON.stringify(port)}`);
     assert.match(result.stderr, /Invalid PORT: expected a decimal integer from 0 to 65535/);
- 'pipe', 'pipe'],
+    assert.equal(result.stdout, '');
+  }
+});
+
+test('server serves app assets and survives malformed URLs', { timeout: 10000 }, async t => {
+  const child = spawn(process.execPath, ['server.js'], {
+    cwd: new URL('../', import.meta.url),
+    env: { ...process.env, PORT: '0' },
+    stdio: ['ignore', 'pipe', 'pipe'],
   });
   t.after(() => new Promise(resolve => {
     if (child.exitCode !== null || child.signalCode !== null) return resolve();
