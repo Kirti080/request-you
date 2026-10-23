@@ -17,5 +17,8 @@ export function renderTasks(list, tasks) {
     remove.dataset.id = task.id;
     remove.textContent = 'Delete';
     remove.setAttribute('aria-label', `Delete ${task.title}`);
-    row.append(chent);
+    row.append(checkbox, label, remove);
+    fragment.append(row);
+  }
+  list.replaceChildren(fragment);
 }
