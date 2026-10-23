@@ -57,7 +57,13 @@ list.addEventListener('click', event => {
   input.focus();
 });
 
-.completed));
+document.querySelectorAll('[data-filter]').forEach(button => button.addEventListener('click', () => {
+  filter = button.dataset.filter;
+  render();
+}));
+
+$('#clear-completed').addEventListener('click', () => {
+  update(tasks.filter(task => !task.completed));
   input.focus();
 });
 
