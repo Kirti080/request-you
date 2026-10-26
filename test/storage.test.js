@@ -48,4 +48,4 @@ test('storage access and quota failures do not escape to the app', t => {
   });
   assert.deepEqual(loadTasks(), { tasks: [], error: true });
   assert.equal(saveTasks([]), false);
-}
+});
