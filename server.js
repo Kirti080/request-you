@@ -16,7 +16,8 @@ const allowed = new Map([
   ['/styles.css', ['./styles.css', 'text/css']],
 ]);
 
-const server = createServer(async (remethod)) {
+const server = createServer(async (request, response) => {
+  if (!['GET', 'HEAD'].includes(request.method)) {
     response.writeHead(405, { Allow: 'GET, HEAD' }).end();
     return;
   }
