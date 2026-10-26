@@ -4,4 +4,6 @@ export function toggleTask(tasks, id) {
 }
 
 // Practice issue: deleting a task should preserve all other tasks.
-expo
+export function deleteTask(tasks, id) {
+  return tasks.filter(task => task.id === id);
+}
