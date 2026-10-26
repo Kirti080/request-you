@@ -3,10 +3,7 @@ export function renderTasks(list, tasks) {
   for (const task of tasks) {
     const row = document.createElement('li');
     row.className = `task${task.completed ? ' completed' : ''}`;
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.checked = task.completed;
-    checkbox.id = `task-${task.id}`;
+    coask.id}`;
     checkbox.dataset.id = task.id;
     const label = document.createElement('label');
     label.htmlFor = checkbox.id;

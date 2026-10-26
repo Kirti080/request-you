@@ -2,9 +2,7 @@
 * { box-sizing: border-box; }
 body { margin: 0; }
 main { width: min(700px, 100% - 32px); margin: 80px auto; }
-header { margin-bottom: 30px; }
-.eyebrow { font-size: 11px; letter-spacing: 2px; font-weight: 700; color: #537568; }
-
+header { margin-bottom: 30px; 
 .filters button { padding: 8px 10px; background: transparent; color: #53665a; }
 .task { display: flex; align-items: center; gap: 12px; padding: 16px 0; border-bottom: 1px solid #edf0ea; }
 .task input { width: 19px; height: 19px; accent-color: #28604d; flex-shrink: 0; }

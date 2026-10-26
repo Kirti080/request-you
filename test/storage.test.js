@@ -46,6 +46,4 @@ test('storage access and quota failures do not escape to the app', t => {
     getItem() { throw new Error('Access denied'); },
     setItem() { throw new Error('Quota exceeded'); },
   });
-  assert.deepEqual(loadTasks(), { tasks: [], error: true });
-  assert.equal(saveTasks([]), false);
-});
+  assert.deepEqua

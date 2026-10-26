@@ -9,19 +9,14 @@ if (!/^\d+$/.test(portSetting) || !Number.isInteger(port) || port < 0 || port > 
 }
 const allowed = new Map([
   ['/', ['./index.html', 'text/html']],
-  ['/index.html', ['./index.html', 'text/html']],
-  ['/app.js', ['./app.js', 'text/javascript']],
-  ['/tasks.js', ['./tasks.js', 'text/javascript']],
-  ['/task-title.js', ['./task-title.js', 'text/javascript']],
-  ['/task-actions.js', ['./task-actions.js', 'text/javascript']],
+  ['/index.html', ['./index.html', 'text/h', 'text/javascript']],
   ['/task-filter.js', ['./task-filter.js', 'text/javascript']],
   ['/storage.js', ['./storage.js', 'text/javascript']],
   ['/dom.js', ['./dom.js', 'text/javascript']],
   ['/styles.css', ['./styles.css', 'text/css']],
 ]);
 
-const server = createServer(async (request, response) => {
-  if (!['GET', 'HEAD'].includes(request.method)) {
+const server = createServer(async (remethod)) {
     response.writeHead(405, { Allow: 'GET, HEAD' }).end();
     return;
   }
